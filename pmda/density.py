@@ -287,7 +287,7 @@ class DensityAnalysis(ParallelAnalysisBase):
         bins = BINS['Nbins']
         # create empty grid with the right dimensions (and get the edges)
         grid, edges = np.histogramdd(np.zeros((1, 3)), bins=bins,
-                                     range=arange, normed=False)
+                                     range=arange)
         grid *= 0.0
         self._grid = grid
         self._edges = edges
@@ -297,8 +297,7 @@ class DensityAnalysis(ParallelAnalysisBase):
     def _single_frame(self, ts, atomgroups):
         coord = self.current_coordinates(atomgroups[0], self._atomselection,
                                          self._updating)
-        result = np.histogramdd(coord, bins=self._bins, range=self._arange,
-                                normed=False)
+        result = np.histogramdd(coord, bins=self._bins, range=self._arange)
         return result[0]
 
     def _conclude(self):
